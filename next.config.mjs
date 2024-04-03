@@ -1,4 +1,6 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {};
+const nextConfig = {
+  domins: ["link.paparect.com"],
+};
 
 export default nextConfig;
