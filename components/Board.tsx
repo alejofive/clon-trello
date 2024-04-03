@@ -211,29 +211,32 @@ const Board = () => {
           </SortableContext>
         </div>
       </div>
-      {createPortal(
-        <DragOverlay>
-          {activeColumn && (
-            <ColumnContainer
-              column={activeColumn}
-              deleteColumn={deleteColumn}
-              updataColumn={updataColumn}
-              createTask={createTask}
-              deleteTask={deleteTask}
-              updateTask={updateTask}
-              tasks={tasks.filter((task) => task.columnId === activeColumn.id)}
-            />
-          )}
-          {activeTask && (
-            <TaskCard
-              task={activeTask}
-              deleteTask={deleteTask}
-              updateTask={updateTask}
-            />
-          )}
-        </DragOverlay>,
-        document.body
-      )}
+      {typeof window !== "undefined" &&
+        createPortal(
+          <DragOverlay>
+            {activeColumn && (
+              <ColumnContainer
+                column={activeColumn}
+                deleteColumn={deleteColumn}
+                updataColumn={updataColumn}
+                createTask={createTask}
+                deleteTask={deleteTask}
+                updateTask={updateTask}
+                tasks={tasks.filter(
+                  (task) => task.columnId === activeColumn.id
+                )}
+              />
+            )}
+            {activeTask && (
+              <TaskCard
+                task={activeTask}
+                deleteTask={deleteTask}
+                updateTask={updateTask}
+              />
+            )}
+          </DragOverlay>,
+          document.body
+        )}
     </DndContext>
   );
 };
