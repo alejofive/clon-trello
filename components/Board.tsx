@@ -191,7 +191,7 @@ const Board = () => {
             className="bg-blue-600 text-white flex px-5 py-2 rounded-xl font-bold"
           >
             <PlusCircleIcon className="w-7 mr-2" />
-            Primary
+            Add Card
           </Button>
         </div>
         <div className="flex items-center gap-5 w-full mt-5 ">
