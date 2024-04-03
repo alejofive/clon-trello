@@ -119,7 +119,7 @@ const ColumnContainer = ({
 
       <Button
         color="primary"
-        onClick={() => createTask(column.id)}
+        onClick={() => createTask(`${column.id}`)}
         className="bg-blue-600 text-white flex px-5 py-2 rounded-xl font-bold min-h-10"
       >
         <PlusCircleIcon className="w-7 mr-2" />
