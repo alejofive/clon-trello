@@ -3,6 +3,7 @@
 import { Column, Id, Task } from "@/types";
 import {
   DndContext,
+  DragEndEvent,
   DragOverEvent,
   DragOverlay,
   DragStartEvent,
@@ -19,8 +20,14 @@ import ColumnContainer from "./ColumnContainer";
 import TaskCard from "./TaskCard";
 
 const Board = () => {
-  const [columns, setColumns] = useState<Column>([]);
-  const columnId = useMemo(() => columns.map((col) => col.id), [columns]);
+  const [columns, setColumns] = useState<Column[]>([]);
+  const columnId = useMemo(() => {
+    if (columns) {
+      return columns.map((col) => col.id);
+    } else {
+      return [];
+    }
+  }, [columns]);
   const [tasks, setTasks] = useState<Task[]>([]);
 
   const [activeTask, setActiveTask] = useState<Task | null>(null);
@@ -39,6 +46,11 @@ const Board = () => {
     const columnToAdd: Column = {
       id: generateId(),
       title: `Column ${columns.length + 1}`,
+      map: function (
+        arg0: (col: { id: Id }) => { id: Id } | { title: string; id: Id }
+      ): unknown {
+        throw new Error("Function not implemented.");
+      },
     };
 
     setColumns([...columns, columnToAdd]);
@@ -66,7 +78,7 @@ const Board = () => {
     }
   };
 
-  const onDragEnd = (event: DragEvent) => {
+  const onDragEnd = (event: DragEndEvent) => {
     setActiveColumn(null);
     setActiveTask(null);
     const { active, over } = event;
